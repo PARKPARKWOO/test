@@ -1,4 +1,5 @@
 name: bsaAction
+
  
 on:  # 우선 main 브랜치만 설정 했지만 dev 브랜치 하나 생성(건의)
   pull_request:   
@@ -19,6 +20,13 @@ jobs:
         with:
           java-version: 17
           distribution: adopt #  jdk를 제공하는 벤더사 이름입니다. (zulu, adopt, microsoft 등) 즉 어느 jdk를 사용할 것인지를 설정
+      - name: Setup MySQL
+        uses: samin/mysql-action@v1
+        with:
+          character set server: 'utf8'
+          mysql database: 'bsa__test'
+          mysql user: 'root'
+          mysql password: 'qkrdndud1'
           
       # 캐싱 부분 추가  ( 테스트 속도 향상)
       - name: Cache Gradle packages
