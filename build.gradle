@@ -25,7 +25,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
-	implementation 'com.h2database:h2' // h2 : implementation
+	runtimeOnly 'com.mysql:mysql-connector-j' // mysql
 	implementation 'org.springframework.boot:spring-boot-starter-security' // 시큐리티 추가
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE' // 시큐리티 추가
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
