@@ -24,6 +24,7 @@ jobs:
         uses: samin/mysql-action@v1
         with:
           character set server: 'utf8'
+          host port: 3800
           mysql database: 'bsa__test'
           mysql user: 'root'
           mysql password: 'qkrdndud1'
