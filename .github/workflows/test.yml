@@ -1,20 +1,20 @@
 name: bsaAction
 
- 
-on:  # 우선 main 브랜치만 설정 했지만 dev 브랜치 하나 생성(건의)
-  pull_request:   
-    branches: 
-    - main
+
+on: # 우선 main 브랜치만 설정 했지만 dev 브랜치 하나 생성(건의)
+  pull_request:
+    branches:
+      - main
   push:
-   branches: 
-    - main
+    branches:
+      - main
 permissions: write-all
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
- 
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3  # 사용할 버전 명시인데 공식문서를 확인해 봐야함
         with:
@@ -27,7 +27,7 @@ jobs:
           mysql database: 'bsa__test'
           mysql user: 'root'
           mysql password: 'qkrdndud1'
-          
+
       # 캐싱 부분 추가  ( 테스트 속도 향상)
       - name: Cache Gradle packages
         uses: actions/cache@v2
@@ -50,20 +50,20 @@ jobs:
           SPRING_JPA_HIBERNATE_DDL_AUTO: update
         notifications:
 
-        - name: Build with Gradle
-          run: ./gradlew build
+      - name: Build with Gradle
+        run: ./gradlew build
 
-        - name: Test with Gradle
-          run: ./gradlew test
-  ## 여기까지 추가 ##
-#      - name: Test with Gradle
-#        run: ./gradlew --info test
+      - name: Test with Gradle
+        run: ./gradlew test
+            ## 여기까지 추가 ##
+            #      - name: Test with Gradle
+            #        run: ./gradlew --info test
 
-        # 캐싱 부분 추가
-        - name: Cleanup Gradle Cache
-        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
-        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
-          if: ${{ always() }}
-          run: |
-            rm -f ~/.gradle/caches/modules-2/modules-2.lock
-            rm -f ~/.gradle/caches/modules-2/gc.properties
+            # 캐싱 부분 추가
+      - name: Cleanup Gradle Cache
+              # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+              # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        if: ${{ always() }}
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
